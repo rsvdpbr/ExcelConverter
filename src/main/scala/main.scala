@@ -28,7 +28,7 @@ object Main extends App {
   if (fileList.length > 0) {
     printStringListWithIndex(fileList)
   } else {
-    println("   -> no excel files")
+    println("    -> no excel files")
   }
 
   // 処理の続行確認
@@ -77,7 +77,7 @@ object Main extends App {
 
   // 文字列リストをインデックスと共に出力
   def printStringListWithIndex(list: List[String]) = list.zipWithIndex.foreach {
-    case (str: String, i: Int) => println("   -> [%03d] %s" format (i, str))
+    case (str: String, i: Int) => println("    -> [%03d] %s" format (i, str))
   }
 }
 
