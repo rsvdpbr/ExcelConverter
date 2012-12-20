@@ -50,12 +50,21 @@ object Main extends App {
       val error = try {
         val excel = Excel(path)
         excel.setSaveDirectory(saveDir)
-        excel.convertToCsv()
+        val data = excel.convertToCsv()
+        for (i <- data) {
+          // エクセルはUTF-8の場合、BOM付きじゃないとちゃんと読み取ってくれない
+          val file_fos = new FileOutputStream(i._1)
+          file_fos.write(0xef); file_fos.write(0xbb); file_fos.write(0xbf)
+          val file_bw = new BufferedWriter(new OutputStreamWriter(file_fos, "UTF-8"))
+          file_bw.write(i._2)
+          file_bw.close()
+          file_fos.close()
+        }
         ""
       } catch {
         case e => e.toString
       }
-      val result = if (error.isEmpty) "Success" else "Failure"
+      val result = if (error.isEmpty) "Success" else "Failure [%s]" format (error)
       Map(
         "path" -> path,
         "file" -> path.split("/").last,

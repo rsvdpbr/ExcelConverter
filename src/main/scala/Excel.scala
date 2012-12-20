@@ -30,7 +30,7 @@ class Excel private (workbook: Workbook, filepath: String) {
       val filename = getFileName(sheetIndex, sheet.getSheetName)
       val content = (for {
         rowIndex <- sheet.getFirstRowNum to sheet.getLastRowNum
-        row = sheet.getRow(rowIndex)
+        row = sheet.getRow(rowIndex) if (row != null)
       } yield (for {
         cellIndex <- row.getFirstCellNum to row.getLastCellNum
         cell = row.getCell(cellIndex)
