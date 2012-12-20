@@ -8,16 +8,10 @@ class Excel private (workbook: Workbook, filepath: String) {
 
   val wb = workbook
   val path = filepath
-  var saveDir: String = null
 
-  def setSaveDirectory(dir: String) {
-    saveDir = if (dir.endsWith("/")) dir else dir + "/"
-
-  }
   def getFileName(index: Int, sheet: String): String = {
-    if (saveDir == null) throw new Exception("directory for saved data is not set")
     val filename = path.split("/").last.replaceAll("""\..+$""", "")
-    "%s%s_%d_%s.csv" format (saveDir, filename, index, sheet)
+    "%s_%d_%s.csv" format (filename, index, sheet)
   }
 
   //  * 区切り文字はカンマで、値はダブルクオートで囲む

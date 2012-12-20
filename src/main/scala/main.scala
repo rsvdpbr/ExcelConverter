@@ -49,11 +49,11 @@ object Main extends App {
       // エクセルオブジェクトの生成
       val error = try {
         val excel = Excel(path)
-        excel.setSaveDirectory(saveDir)
         val data = excel.convertToCsv()
         for (i <- data) {
           // エクセルはUTF-8の場合、BOM付きじゃないとちゃんと読み取ってくれない
-          val file_fos = new FileOutputStream(i._1)
+          val file_fos = new FileOutputStream(
+            saveDir + (if (!saveDir.endsWith("/")) "/" else "") + i._1)
           file_fos.write(0xef); file_fos.write(0xbb); file_fos.write(0xbf)
           val file_bw = new BufferedWriter(new OutputStreamWriter(file_fos, "UTF-8"))
           file_bw.write(i._2)
