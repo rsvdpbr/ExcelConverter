@@ -1,3 +1,4 @@
+import AssemblyKeys._
 
 name := "ExcelConverter"
 
@@ -14,3 +15,5 @@ libraryDependencies += "org.apache.poi" % "poi-ooxml" % "3.8"
 libraryDependencies += "org.apache.poi" % "ooxml-schemas" % "1.1"
 
 libraryDependencies += "org.apache.poi" % "poi-ooxml-schemas" % "3.8"
+
+assemblySettings
